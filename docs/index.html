@@ -227,6 +227,7 @@
 
     <form method="get" id="consent-form">
       <input type="checkbox" id="agree" name="agree" value="agreed"> I agree to terms the above
+      <input type="hidden" id="state-input" name="state">
       <input type="submit" id="submit-button" value="Submit" disabled>
     </form>
   </div>
@@ -260,9 +261,10 @@
   const state = queryParams.get('state');
   const callbackUrl = queryParams.get('callback');
 
-  document.getElementById('consent-form').action = decodeURI(callbackUrl).concat('?state=', state);
+  document.getElementById('consent-form').action = decodeURI(callbackUrl);
+  document.getElementById('state-input').value = state;
 
-  console.log(queryString, queryParams, state);
+  console.log(queryString, callbackUrl, state);
 
   const submitButton = document.getElementById('submit-button');
   const agreeCheckbox = document.getElementById('agree');

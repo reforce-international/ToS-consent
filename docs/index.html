@@ -225,7 +225,7 @@
       </div>
     </section>
 
-    <form action="#">
+    <form method="get" id="consent-form">
       <input type="checkbox" id="agree" name="agree" value="agreed"> I agree to terms the above
       <input type="submit" id="submit-button" value="Submit" disabled>
     </form>
@@ -235,6 +235,11 @@
   body {
     font-family: sans-serif;
     background-color: #eaeaea;
+  }
+
+  a {
+    color: #ff6309;
+    text-decoration: none;
   }
 
   form {
@@ -250,12 +255,23 @@
 
 </style>
 <script>
+  const queryString = window.location.search;
+  const queryParams = new URLSearchParams(queryString);
+  const state = queryParams.get('state');
+  const callbackUrl = queryParams.get('callback');
+
+  document.getElementById('consent-form').action = decodeURI(callbackUrl).concat('?state=', state);
+
+  console.log(queryString, queryParams, state);
+
   const submitButton = document.getElementById('submit-button');
   const agreeCheckbox = document.getElementById('agree');
 
   agreeCheckbox.addEventListener('change', (e) => {
     submitButton.disabled = !e.target.checked;
   });
+
+
 
   submitButton.addEventListener('click', (e) => {
     if (!agreeCheckbox.checked) {

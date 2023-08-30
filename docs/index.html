@@ -226,7 +226,10 @@
     </section>
 
     <form method="get" id="consent-form">
-      <input type="checkbox" id="agree" name="agree" value="agreed"> I agree to terms the above
+
+      <input type="checkbox" id="agree" name="agree" value="agreed">
+      <label for="agree">I agree to terms the
+        above</label>
       <input type="hidden" id="state-input" name="state">
       <input type="submit" id="submit-button" value="Submit" disabled>
     </form>
@@ -264,15 +267,12 @@
   document.getElementById('consent-form').action = decodeURI(callbackUrl);
   document.getElementById('state-input').value = state;
 
-  console.log(queryString, callbackUrl, state);
-
   const submitButton = document.getElementById('submit-button');
   const agreeCheckbox = document.getElementById('agree');
 
   agreeCheckbox.addEventListener('change', (e) => {
     submitButton.disabled = !e.target.checked;
   });
-
 
 
   submitButton.addEventListener('click', (e) => {

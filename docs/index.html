@@ -230,7 +230,7 @@
       <input type="checkbox" id="agree" name="agree" value="true">
       <label for="agree">I agree to terms the above</label>
       <input type="hidden" id="state-input" name="state">
-      <input type="submit" id="submit-button" value="Submit" disabled>
+      <input type="submit" id="submit-button" class="button" value="Submit" disabled>
     </form>
   </div>
 </body>
@@ -243,6 +243,26 @@
   a {
     color: #ff6309;
     text-decoration: none;
+  }
+
+  .button {
+    background-color: #ff6309;
+    color: #fff;
+    border: none;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    padding: 4px 16px;
+    border-radius: 3px;
+  }
+
+  .button:not(:disabled):hover {
+    background-color: #e65908;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  .button:disabled {
+    background-color: #ccc;
+    color: #fff;
   }
 
   form {

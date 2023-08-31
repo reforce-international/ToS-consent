@@ -227,9 +227,8 @@
 
     <form method="get" id="consent-form">
 
-      <input type="checkbox" id="agree" name="agree" value="agreed">
-      <label for="agree">I agree to terms the
-        above</label>
+      <input type="checkbox" id="agree" name="agree" value="true">
+      <label for="agree">I agree to terms the above</label>
       <input type="hidden" id="state-input" name="state">
       <input type="submit" id="submit-button" value="Submit" disabled>
     </form>
@@ -258,30 +257,41 @@
   }
 
 </style>
+
 <script>
   const queryString = window.location.search;
   const queryParams = new URLSearchParams(queryString);
   const state = queryParams.get('state');
   const callbackUrl = queryParams.get('callback');
 
-  document.getElementById('consent-form').action = decodeURI(callbackUrl);
-  document.getElementById('state-input').value = state;
+  const consentForm = document.getElementById('consent-form');
+  if (state && callbackUrl) {
+    const submitButton = document.getElementById('submit-button');
+    const agreeCheckbox = document.getElementById('agree');
+    const stateInput = document.getElementById('state-input')
 
-  const submitButton = document.getElementById('submit-button');
-  const agreeCheckbox = document.getElementById('agree');
-
-  agreeCheckbox.addEventListener('change', (e) => {
-    submitButton.disabled = !e.target.checked;
-  });
+    consentForm.action = decodeURI(callbackUrl);
+    stateInput.value = state;
 
 
-  submitButton.addEventListener('click', (e) => {
-    if (!agreeCheckbox.checked) {
-      e.preventDefault();
-      alert('Please agree to the terms');
-    }
 
-  });
+    agreeCheckbox.addEventListener('change', (e) => {
+      submitButton.disabled = !e.target.checked;
+    });
+
+
+    submitButton.addEventListener('click', (e) => {
+      if (!agreeCheckbox.checked) {
+        e.preventDefault();
+        alert('Please agree to the terms');
+      }
+
+    });
+
+  } else {
+    consentForm.style.display = 'none';
+  }
+
 </script>
 
 </html>

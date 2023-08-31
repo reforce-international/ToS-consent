@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Howwe - Privacy policy</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="" />
+  <link href="https://cdn.jsdelivr.net/npm/modern-normalize@v2.0.0/modern-normalize.min.css" rel="stylesheet">
+  <link rel="icon" href="favicon.ico">
+</head>
+
+<body>
+  <div class="wrapper">
+    <a href="https://www.howwe.io"> <img width="484" height="141" alt="" sizes="(max-width: 484px) 100vw, 484px"
+        src="https://cdn-iimld.nitrocdn.com/sNlxdBVhtjwJDVXHezKkNfDWCmWamiMv/assets/images/optimized/rev-25513fa/www.howwe.io/wp-content/uploads/2022/12/Howwe_Logo_Orange_CMYK-ai.png"
+        srcset="https://cdn-iimld.nitrocdn.com/sNlxdBVhtjwJDVXHezKkNfDWCmWamiMv/assets/images/optimized/rev-25513fa/www.howwe.io/wp-content/uploads/2022/12/Howwe_Logo_Orange_CMYK-ai.png 484w, https://cdn-iimld.nitrocdn.com/sNlxdBVhtjwJDVXHezKkNfDWCmWamiMv/assets/images/optimized/rev-25513fa/www.howwe.io/wp-content/uploads/2022/12/Howwe_Logo_Orange_CMYK-ai-300x87.png 300w">
+    </a>
+    <section>
+
+      ##PRIVACY_POLICY_GOES_HERE##
+    </section>
+
+    <form method="get" id="consent-form">
+
+      <input type="checkbox" id="agree" name="agree" value="true">
+      <label for="agree">I agree to terms the above</label>
+      <input type="hidden" id="state-input" name="state">
+      <input type="submit" id="submit-button" class="button" value="Submit" disabled>
+    </form>
+  </div>
+</body>
+<style>
+  body {
+    font-family: sans-serif;
+    background-color: #eaeaea;
+  }
+
+  a {
+    color: #ff6309;
+    text-decoration: none;
+  }
+
+  .button {
+    background-color: #ff6309;
+    color: #fff;
+    border: none;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    padding: 4px 16px;
+    border-radius: 3px;
+  }
+
+  .button:not(:disabled):hover {
+    background-color: #e65908;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  .button:disabled {
+    background-color: #ccc;
+    color: #fff;
+  }
+
+  form {
+    max-width: 400px;
+    margin: 32px auto;
+  }
+
+  .wrapper {
+    max-width: 1140px;
+    margin: 0 auto;
+    margin-bottom: 128px;
+  }
+
+</style>
+
+<script>
+  const queryString = window.location.search;
+  const queryParams = new URLSearchParams(queryString);
+  const state = queryParams.get('state');
+  const callbackUrl = queryParams.get('callback');
+
+  const consentForm = document.getElementById('consent-form');
+  if (state && callbackUrl) {
+    const submitButton = document.getElementById('submit-button');
+    const agreeCheckbox = document.getElementById('agree');
+    const stateInput = document.getElementById('state-input')
+
+    consentForm.action = decodeURI(callbackUrl);
+    stateInput.value = state;
+
+
+
+    agreeCheckbox.addEventListener('change', (e) => {
+      submitButton.disabled = !e.target.checked;
+    });
+
+
+    submitButton.addEventListener('click', (e) => {
+      if (!agreeCheckbox.checked) {
+        e.preventDefault();
+        alert('Please agree to the terms');
+      }
+
+    });
+
+  } else {
+    consentForm.style.display = 'none';
+  }
+
+</script>
+
+</html>

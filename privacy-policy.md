@@ -30,21 +30,23 @@
 - **COOKIES**  
   Our website, like most other websites, uses cookies to give you the best possible user experience. Cookies are small text files that are added to your computer or mobile phone when you use our website.
 
-      Our cookies allow us to:
-      1.  Ensure that the website works as you expect.
-      2.  Improve your download time and security when you use the website.
-      3.  Gather anonymous statistics in order to improve the website’s performance and functionality, as well as evaluate and improve marketing efforts.
+  Our cookies allow us to:
 
-      We do not use cookies to:
-      1.  Save any personal information about you without your consent.
-      2.  Gather any sensitive information.
-      3.  Forward personal information to third parties.
+  1.  Ensure that the website works as you expect.
+  2.  Improve your download time and security when you use the website.
+  3.  Gather anonymous statistics in order to improve the website’s performance and functionality, as well as evaluate and improve marketing efforts.
 
-      If the settings in the browser you use to visit our website are set in such a way that they allow cookies, we interpret this as accepting cookies on our website.
+  We do not use cookies to:
 
-      Cookies can be deleted or completely turned off if desired. However, we cannot guarantee that the website and Howwe® will work satisfactorily then. Cookies can be turned off by adjusting your browser’s security settings. How this is done varies somewhat between different browsers and versions of browsers but is described if you search in your specific browser’s help page.
+  1.  Save any personal information about you without your consent.
+  2.  Gather any sensitive information.
+  3.  Forward personal information to third parties.
 
-      Further information on cookies is available on The Swedish Post and Telecom Authority’s website.
+  If the settings in the browser you use to visit our website are set in such a way that they allow cookies, we interpret this as accepting cookies on our website.
+
+  Cookies can be deleted or completely turned off if desired. However, we cannot guarantee that the website and Howwe® will work satisfactorily then. Cookies can be turned off by adjusting your browser’s security settings. How this is done varies somewhat between different browsers and versions of browsers but is described if you search in your specific browser’s help page.
+
+  Further information on cookies is available on The Swedish Post and Telecom Authority’s website.
 
 - **YOUR RIGHTS**
   1.  You have an absolute right to object to the processing of your personal data for direct marketing.

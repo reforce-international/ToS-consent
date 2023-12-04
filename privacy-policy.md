@@ -23,7 +23,7 @@
 
 **5\. Global Login**:
 
-- All users access our services through a single global login page at **[login.howwe.io](http://login.howwe.io/)**. By using Howwe, you acknowledge that our login provider, Auth0, is located in the EU and may require basic user information for authentication purposes. This login mechanism is separate from where your Howwe data is stored.
+- All users access our services through a single global login page at [login.howwe.io](http://login.howwe.io/). By using Howwe, you acknowledge that our login provider, Auth0, is located in the EU and may require basic user information for authentication purposes. This login mechanism is separate from where your Howwe data is stored.
 
 **6\. Data Storage and GDPR Compliance**:
 
@@ -32,14 +32,14 @@
 **7\. Risks and Data Security**:
 
 - We employ robust measures and technologies to ensure the security of your personal data. For more details on our security practices, please refer to:
-  - **[Our Information Security Policy](https://help.howwe.io/sv/articles/28876-information-security)**
-  - **[Our Security Measures & Encryption policy](https://help.howwe.io/sv/articles/28870-security-measures-encryption)**
-  - **[Our Data Protection Impact Assessment](https://help.howwe.io/sv/articles/28873-data-protection-impact-assessment)**
+  - [Our Information Security Policy](https://help.howwe.io/sv/articles/28876-information-security)
+  - [Our Security Measures & Encryption policy](https://help.howwe.io/sv/articles/28870-security-measures-encryption)
+  - [Our Data Protection Impact Assessment](https://help.howwe.io/sv/articles/28873-data-protection-impact-assessment)
 - Users should be aware of the potential risks associated with data storage and login mechanisms. We continuously work to mitigate these risks and ensure the safety of your data.
 
 **8\. Cookies and Tracking**:
 
-- **On our public webpage**: We use cookies to ensure website functionality, improve download time and security, gather anonymous statistics, and evaluate marketing efforts. Users can opt-out of non-essential cookies on our website. For more details on our use of cookies on the website, please refer to our **[Cookie Policy](https://www.howwe.io/cookie-policy/)**.
+- **On our public webpage**: We use cookies to ensure website functionality, improve download time and security, gather anonymous statistics, and evaluate marketing efforts. Users can opt-out of non-essential cookies on our website. For more details on our use of cookies on the website, please refer to our [Cookie Policy](https://www.howwe.io/cookie-policy/).
 - **Within our software**: We use cookies to ensure optimal functionality and user experience. Due to the integral role these cookies play in the software’s operation, users cannot opt-out of cookies within the software.
 
 **9\. Changes to This Policy**:
@@ -48,4 +48,4 @@
 
 **10\. Contact Information**:
 
-- For any questions or concerns, please contact us at **[stina.robb@howwe.io](mailto:stina.akesson@howwe.io)**.
+- For any questions or concerns, please contact us at [stina.robb@howwe.io](mailto:stina.akesson@howwe.io).

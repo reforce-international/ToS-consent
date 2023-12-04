@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+##GENERATED_FILE_COMMENT_GOES_HERE##
 
 <head>
   <meta charset="UTF-8" />
@@ -12,13 +13,14 @@
 
 <body>
   <div class="wrapper">
-    <a href="https://www.howwe.io"> <img width="484" height="141" alt="" sizes="(max-width: 484px) 100vw, 484px"
-        src="https://cdn-iimld.nitrocdn.com/sNlxdBVhtjwJDVXHezKkNfDWCmWamiMv/assets/images/optimized/rev-25513fa/www.howwe.io/wp-content/uploads/2022/12/Howwe_Logo_Orange_CMYK-ai.png"
-        srcset="https://cdn-iimld.nitrocdn.com/sNlxdBVhtjwJDVXHezKkNfDWCmWamiMv/assets/images/optimized/rev-25513fa/www.howwe.io/wp-content/uploads/2022/12/Howwe_Logo_Orange_CMYK-ai.png 484w, https://cdn-iimld.nitrocdn.com/sNlxdBVhtjwJDVXHezKkNfDWCmWamiMv/assets/images/optimized/rev-25513fa/www.howwe.io/wp-content/uploads/2022/12/Howwe_Logo_Orange_CMYK-ai-300x87.png 300w">
+    <a href="https://www.howwe.io">
+      <img height="100" alt="howwe logo"
+        src="https://storage.googleapis.com/howwe-public-images/static/howwe-logo-simply-medium.png" />
     </a>
-    <section>
+    <section class="privacy-policy-content">
 
       ##PRIVACY_POLICY_GOES_HERE##
+
     </section>
 
     <form method="get" id="consent-form">
@@ -34,6 +36,13 @@
   body {
     font-family: sans-serif;
     background-color: #eaeaea;
+    height: 100vh;
+
+    background-color: #eaeaea;
+    background-image: url("https://cdn-iimld.nitrocdn.com/sNlxdBVhtjwJDVXHezKkNfDWCmWamiMv/assets/images/optimized/rev-8b53517/www.howwe.io/wp-content/uploads/2022/12/firstsection.png");
+    background-position: top right;
+    background-repeat: no-repeat;
+    background-size: 400px auto;
   }
 
   a {
@@ -67,9 +76,32 @@
   }
 
   .wrapper {
-    max-width: 1140px;
+    max-height: 100%;
+    max-width: 1080px;
     margin: 0 auto;
     margin-bottom: 128px;
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    padding-bottom: 100px;
+  }
+
+  .privacy-policy-content {
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 8px;
+    padding: 16px 32px;
+    overflow-y: auto;
+    line-height: 1.4;
+  }
+
+  @media screen and (max-width: 600px) {
+
+
+    .privacy-policy-content {
+      /* background-color: rgba(255, 255, 0, 0.8); */
+      padding: 8px 16px;
+    }
+
   }
 
 </style>

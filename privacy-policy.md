@@ -2,7 +2,7 @@
 
 **1\. Introduction**:
 
-- Welcome to the Howwe Technologies AB Privacy Policy. This Privacy Policy outlines how we collect, use, and protect your personal data when you use our services. Last updated: \[November 2023\].
+- Welcome to the Howwe Privacy Policy. This Privacy Policy governs the manner in which Howwe, developed by Howwe Technologies AB, collects, uses, maintains and discloses information collected from users and protect your personal data when you use our services. Last updated: \[March, 2024\].
 
 **2\. Information We Collect**:
 
@@ -29,6 +29,9 @@
 
 - We primarily process and store your Howwe data in the European Union. However, we have the capability to offer regional data storage for Howwe data, allowing customers to choose their base region for data hosting based on their requirements. Please note that the regions available for selection are determined by the regions Google Cloud currently supports. We ensure that our policy fully complies with the GDPR and local rulesets of each market we operate in. For EU citizens working for non-EU companies, while we uphold the standard rights such as the right to be forgotten, it is the responsibility of the user and their employer to ensure that their data is processed in accordance with GDPR regulations.
 
+- Data Deletion Request Process: Users wishing to have their data deleted can simply send a request to help@howwe.io. Our team is committed to processing such requests promptly in compliance with applicable data protection laws.
+In response to a deletion request, we scramble all personal data related to the user, effectively anonymizing their information. Non-personal data, such as numerical values inputted for objectives or goals, may be retained but will no longer be identifiable to any user.
+
 **7\. Risks and Data Security**:
 
 - We employ robust measures and technologies to ensure the security of your personal data. For more details on our security practices, please refer to:
@@ -48,4 +51,4 @@
 
 **10\. Contact Information**:
 
-- For any questions or concerns, please contact us at [stina.robb@howwe.io](mailto:stina.akesson@howwe.io).
+- For any questions or concerns, please contact us at [contact@howwe.io](mailto:contact@howwe.io).

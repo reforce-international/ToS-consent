@@ -104,18 +104,92 @@
       font-size: 20px;
     }
 
-    /* Consent / sign-up card. The script toggles this element's display, so
-       the card styling lives on the form itself — hiding it hides the card. */
-    #consent-form {
+    /* Sticky consent footer — hidden by default, revealed by the script only
+       during the Auth0 signup-consent flow (when state + callback are present). */
+    .consent-footer {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 10;
+      margin: 0;
+      display: none;
+      background-color: var(--surface);
+      border-top: 1px solid var(--border);
+      box-shadow: 0 -2px 8px rgb(9 45 71 / 8%);
+    }
+
+    body.consent-mode .consent-footer {
+      display: block;
+    }
+
+    .consent-footer__inner {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px 24px;
+      flex-wrap: wrap;
+    }
+
+    .consent-footer__hint {
       margin: 0;
       display: flex;
-      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--orange);
+    }
+
+    /* Once the whole policy has been read, drop the hint and unlock the box. */
+    body.policy-read .consent-footer__hint {
+      display: none;
+    }
+
+    /* Orange badge that bounces and emits an expanding pulse ring, so the
+       "scroll to read" cue is hard to miss. */
+    .consent-footer__arrow {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background-color: var(--orange);
+      color: #fff;
+      font-size: 13px;
+      line-height: 1;
+      animation:
+        consentArrowBounce 1.1s cubic-bezier(0.28, 0.84, 0.42, 1) infinite,
+        consentArrowPulse 1.6s ease-out infinite;
+    }
+
+    @keyframes consentArrowBounce {
+      0%, 55%, 100% { transform: translateY(0); }
+      70% { transform: translateY(5px); }
+      85% { transform: translateY(2px); }
+    }
+
+    @keyframes consentArrowPulse {
+      0% { box-shadow: 0 0 0 0 rgb(255 99 9 / 50%); }
+      70%, 100% { box-shadow: 0 0 0 12px rgb(255 99 9 / 0%); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .consent-footer__arrow {
+        animation: none;
+      }
+    }
+
+    .consent-footer__actions {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
       gap: 16px;
-      background-color: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      box-shadow: var(--shadow-card);
-      padding: 24px 28px;
+      flex-wrap: wrap;
     }
 
     .consent-agree {
@@ -123,6 +197,11 @@
       align-items: center;
       gap: 8px;
       font-size: 15px;
+    }
+
+    /* Dim the agree control while it is still locked behind the scroll gate. */
+    body.consent-mode:not(.policy-read) .consent-agree {
+      opacity: 0.5;
     }
 
     .consent-agree input[type="checkbox"] {
@@ -133,12 +212,15 @@
       cursor: pointer;
     }
 
+    .consent-agree input[type="checkbox"]:disabled {
+      cursor: not-allowed;
+    }
+
     .consent-agree label {
       cursor: pointer;
     }
 
     .button {
-      align-self: flex-start;
       background-color: var(--orange);
       color: #fff;
       border: none;
@@ -198,16 +280,26 @@
       ##PRIVACY_POLICY_GOES_HERE##
 
     </section>
-
-    <form method="get" id="consent-form">
-      <div class="consent-agree">
-        <input type="checkbox" id="agree" name="agree" value="true" />
-        <label for="agree">I agree to the terms above</label>
-      </div>
-      <input type="hidden" id="state-input" name="state" />
-      <input type="submit" id="submit-button" class="button" value="Submit" disabled />
-    </form>
+    <div id="policy-end" aria-hidden="true"></div>
   </div>
+
+  <!-- Sticky consent footer — only revealed during the Auth0 signup-consent flow -->
+  <form method="get" id="consent-form" class="consent-footer">
+    <div class="consent-footer__inner">
+      <p class="consent-footer__hint" id="consent-hint">
+        <span class="consent-footer__arrow" aria-hidden="true">&#8595;</span>
+        <span>Scroll down and read the full policy to continue</span>
+      </p>
+      <div class="consent-footer__actions">
+        <div class="consent-agree">
+          <input type="checkbox" id="agree" name="agree" value="true" disabled />
+          <label for="agree">I agree to the terms above</label>
+        </div>
+        <input type="hidden" id="state-input" name="state" />
+        <input type="submit" id="submit-button" class="button" value="Submit" disabled />
+      </div>
+    </div>
+  </form>
 
   <script>
     const queryString = window.location.search;
@@ -220,9 +312,36 @@
       const submitButton = document.getElementById('submit-button');
       const agreeCheckbox = document.getElementById('agree');
       const stateInput = document.getElementById('state-input')
+      const policyEnd = document.getElementById('policy-end');
+      const wrapper = document.querySelector('.wrapper');
 
       consentForm.action = decodeURI(callbackUrl);
       stateInput.value = state;
+      document.body.classList.add('consent-mode');
+
+      // Keep the fixed footer from hiding the end of the policy.
+      const reserveFooterSpace = () => {
+        wrapper.style.paddingBottom = (consentForm.offsetHeight + 32) + 'px';
+      };
+      reserveFooterSpace();
+      window.addEventListener('resize', reserveFooterSpace);
+
+      // Gate the agree checkbox until the reader reaches the end of the policy.
+      const unlockAgree = () => {
+        agreeCheckbox.disabled = false;
+        document.body.classList.add('policy-read');
+      };
+      const checkScrolledToEnd = () => {
+        const reachedEnd =
+          policyEnd.getBoundingClientRect().top <=
+          window.innerHeight - consentForm.offsetHeight + 8;
+        if (reachedEnd) {
+          unlockAgree();
+          window.removeEventListener('scroll', checkScrolledToEnd);
+        }
+      };
+      window.addEventListener('scroll', checkScrolledToEnd, { passive: true });
+      checkScrolledToEnd();
 
       agreeCheckbox.addEventListener('change', (e) => {
         submitButton.disabled = !e.target.checked;

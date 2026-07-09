@@ -6,140 +6,357 @@
   <meta charset="UTF-8" />
   <title>Howwe - Privacy policy</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="" />
+  <meta name="description" content="Howwe privacy policy and terms consent." />
   <link href="https://cdn.jsdelivr.net/npm/modern-normalize@v2.0.0/modern-normalize.min.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="icon" href="favicon.ico">
+  <style>
+    :root {
+      --navy: #092d47;
+      --navy-end: #0a3a5c;
+      --orange: #ff6309;
+      --orange-hover: #e65908;
+      --body-bg: #edf1f7;
+      --surface: #ffffff;
+      --border: #e0e0e0;
+      --text: #21303f;
+      --tagline: rgb(255 255 255 / 60%);
+      --shadow-card: 0 1px 3px rgb(9 45 71 / 6%);
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Mulish", sans-serif;
+      color: var(--text);
+      background-color: var(--body-bg);
+    }
+
+    a {
+      color: var(--orange);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* Navy "blue top bar" — mirrors the client app's brand header */
+    .topbar {
+      width: 100%;
+      background: linear-gradient(180deg, var(--navy) 0%, var(--navy-end) 100%);
+    }
+
+    .topbar__inner {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 20px 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 2px;
+    }
+
+    .topbar__logo {
+      display: block;
+      height: 30px;
+      width: auto;
+    }
+
+    .topbar__logo path {
+      fill: var(--orange);
+    }
+
+    .topbar__tagline {
+      margin: 0;
+      font-size: 11px;
+      letter-spacing: 0.02em;
+      color: var(--tagline);
+    }
+
+    .wrapper {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 32px 16px 96px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .privacy-policy-content {
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      box-shadow: var(--shadow-card);
+      padding: 32px 40px;
+      line-height: 1.6;
+    }
+
+    .privacy-policy-content h1 {
+      margin-top: 0;
+      font-size: 28px;
+    }
+
+    .privacy-policy-content h2 {
+      margin-top: 28px;
+      font-size: 20px;
+    }
+
+    /* Sticky consent footer — hidden by default, revealed by the script only
+       during the Auth0 signup-consent flow (when state + callback are present). */
+    .consent-footer {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 10;
+      margin: 0;
+      display: none;
+      background-color: var(--surface);
+      border-top: 1px solid var(--border);
+      box-shadow: 0 -2px 8px rgb(9 45 71 / 8%);
+    }
+
+    body.consent-mode .consent-footer {
+      display: block;
+    }
+
+    .consent-footer__inner {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px 24px;
+      flex-wrap: wrap;
+    }
+
+    .consent-footer__hint {
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--orange);
+    }
+
+    /* Once the whole policy has been read, drop the hint and unlock the box. */
+    body.policy-read .consent-footer__hint {
+      display: none;
+    }
+
+    /* Orange badge that bounces and emits an expanding pulse ring, so the
+       "scroll to read" cue is hard to miss. */
+    .consent-footer__arrow {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background-color: var(--orange);
+      color: #fff;
+      font-size: 13px;
+      line-height: 1;
+      animation:
+        consentArrowBounce 1.1s cubic-bezier(0.28, 0.84, 0.42, 1) infinite,
+        consentArrowPulse 1.6s ease-out infinite;
+    }
+
+    @keyframes consentArrowBounce {
+      0%, 55%, 100% { transform: translateY(0); }
+      70% { transform: translateY(5px); }
+      85% { transform: translateY(2px); }
+    }
+
+    @keyframes consentArrowPulse {
+      0% { box-shadow: 0 0 0 0 rgb(255 99 9 / 50%); }
+      70%, 100% { box-shadow: 0 0 0 12px rgb(255 99 9 / 0%); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .consent-footer__arrow {
+        animation: none;
+      }
+    }
+
+    .consent-footer__actions {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .consent-agree {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 15px;
+    }
+
+    /* Dim the agree control while it is still locked behind the scroll gate. */
+    body.consent-mode:not(.policy-read) .consent-agree {
+      opacity: 0.5;
+    }
+
+    .consent-agree input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      margin: 0;
+      accent-color: var(--orange);
+      cursor: pointer;
+    }
+
+    .consent-agree input[type="checkbox"]:disabled {
+      cursor: not-allowed;
+    }
+
+    .consent-agree label {
+      cursor: pointer;
+    }
+
+    .button {
+      background-color: var(--orange);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      box-shadow: 0 1px 2px rgb(0 0 0 / 20%);
+      padding: 10px 24px;
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .button:not(:disabled):hover {
+      background-color: var(--orange-hover);
+      cursor: pointer;
+    }
+
+    .button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+
+    @media screen and (max-width: 600px) {
+      .topbar__inner {
+        padding: 16px;
+      }
+
+      .wrapper {
+        padding: 20px 12px 64px;
+      }
+
+      .privacy-policy-content {
+        padding: 20px 18px;
+      }
+
+      #consent-form {
+        padding: 20px 18px;
+      }
+    }
+  </style>
 </head>
 
 <body>
-  <div class="wrapper">
-    <div>
-      <img height="100" alt="howwe logo"
-        src="https://storage.googleapis.com/howwe-public-images/static/howwe-logo-simply-medium.png" />
+  <header class="topbar">
+    <div class="topbar__inner">
+      <svg class="topbar__logo" viewBox="0 0 941.9 241.9" xmlns="http://www.w3.org/2000/svg" role="img"
+        aria-label="Howwe">
+        <path
+          d="M815.6 134h104c-1.4-27.6-15.7-53-48.9-53-28.3-.1-49.6 20.2-55.1 53zm-22.4 17.8c0-52.3 31.4-90 77.5-90 46.8 0 71.2 36.3 71.2 84.5v7.3H814.2c.7 42.2 24.1 69.1 57.6 69.1 26.2 0 43.6-14.7 48.8-37.7 0 0 14 .3 20.9.3-.2 2-.6 4-1 5.9-9.4 31.4-34.2 50.6-68.8 50.6-47.1 0-78.5-36.6-78.5-90zM367.8 64.9h23.4l40.1 137.8 39.4-137.8h19.5l40.1 137.8 40.1-137.8H590l40 137.9L669.8 65H690l39.4 137.8L768.8 65h23.4l-53 173.8h-19.5L679.9 99.5l-40.1 139.2h-19.5L580.4 99.5l-40.1 139.2h-19.5L480.5 99.5l-39.8 139.2h-19.5L367.8 64.9zm-138.5 86.9c0 19.5 5.9 37.3 16.4 49.9 10.5 12.2 25.5 18.8 42.6 18.8 17.5 0 32.1-6.6 42.6-18.8 10.5-12.6 16.4-30.4 16.4-49.9s-5.9-37.3-16.4-49.9c-10.5-12.2-25.1-18.8-42.6-18.8-17.1 0-32.1 6.6-42.6 18.8-10.5 12.6-16.4 30.4-16.4 49.9zm-21.3 0c0-49.5 30.7-90 80.3-90 49.9 0 80.3 40.5 80.3 90 0 49.9-30.4 90-80.3 90-49.6 0-80.3-40.1-80.3-90zM0 238.4V0h23.4v105h138.9V0h23v238.4h-23V125.3H23.4v113.1H0z" />
+      </svg>
+      <p class="topbar__tagline">Intelligent Strategy Execution</p>
     </div>
+  </header>
+
+  <div class="wrapper">
     <section class="privacy-policy-content">
 
       ##PRIVACY_POLICY_GOES_HERE##
 
     </section>
-
-    <form method="get" id="consent-form">
-
-      <input type="checkbox" id="agree" name="agree" value="true">
-      <label for="agree">I agree to terms the above</label>
-      <input type="hidden" id="state-input" name="state">
-      <input type="submit" id="submit-button" class="button" value="Submit" disabled>
-    </form>
+    <div id="policy-end" aria-hidden="true"></div>
   </div>
-</body>
-<style>
-  body {
-    font-family: sans-serif;
-    background-color: #eaeaea;
-    height: 100vh;
 
-    background-color: #eaeaea;
-    background-image: url("https://cdn-iimld.nitrocdn.com/sNlxdBVhtjwJDVXHezKkNfDWCmWamiMv/assets/images/optimized/rev-8b53517/www.howwe.io/wp-content/uploads/2022/12/firstsection.png");
-    background-position: top right;
-    background-repeat: no-repeat;
-    background-size: 400px auto;
-  }
+  <!-- Sticky consent footer — only revealed during the Auth0 signup-consent flow -->
+  <form method="get" id="consent-form" class="consent-footer">
+    <div class="consent-footer__inner">
+      <p class="consent-footer__hint" id="consent-hint">
+        <span class="consent-footer__arrow" aria-hidden="true">&#8595;</span>
+        <span>Scroll down and read the full policy to continue</span>
+      </p>
+      <div class="consent-footer__actions">
+        <div class="consent-agree">
+          <input type="checkbox" id="agree" name="agree" value="true" disabled />
+          <label for="agree">I agree to the terms above</label>
+        </div>
+        <input type="hidden" id="state-input" name="state" />
+        <input type="submit" id="submit-button" class="button" value="Submit" disabled />
+      </div>
+    </div>
+  </form>
 
-  a {
-    color: #ff6309;
-    text-decoration: none;
-  }
+  <script>
+    const queryString = window.location.search;
+    const queryParams = new URLSearchParams(queryString);
+    const state = queryParams.get('state');
+    const callbackUrl = queryParams.get('callback');
 
-  .button {
-    background-color: #ff6309;
-    color: #fff;
-    border: none;
-    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-    padding: 4px 16px;
-    border-radius: 3px;
-  }
+    const consentForm = document.getElementById('consent-form');
+    if (state && callbackUrl) {
+      const submitButton = document.getElementById('submit-button');
+      const agreeCheckbox = document.getElementById('agree');
+      const stateInput = document.getElementById('state-input')
+      const policyEnd = document.getElementById('policy-end');
+      const wrapper = document.querySelector('.wrapper');
 
-  .button:not(:disabled):hover {
-    background-color: #e65908;
-    color: #fff;
-    cursor: pointer;
-  }
+      consentForm.action = decodeURI(callbackUrl);
+      stateInput.value = state;
+      document.body.classList.add('consent-mode');
 
-  .button:disabled {
-    background-color: #ccc;
-    color: #fff;
-  }
+      // Keep the fixed footer from hiding the end of the policy.
+      const reserveFooterSpace = () => {
+        wrapper.style.paddingBottom = (consentForm.offsetHeight + 32) + 'px';
+      };
+      reserveFooterSpace();
+      window.addEventListener('resize', reserveFooterSpace);
 
-  form {
-    max-width: 400px;
-    margin: 32px auto;
-  }
+      // Gate the agree checkbox until the reader reaches the end of the policy.
+      const unlockAgree = () => {
+        agreeCheckbox.disabled = false;
+        document.body.classList.add('policy-read');
+      };
+      const checkScrolledToEnd = () => {
+        const reachedEnd =
+          policyEnd.getBoundingClientRect().top <=
+          window.innerHeight - consentForm.offsetHeight + 8;
+        if (reachedEnd) {
+          unlockAgree();
+          window.removeEventListener('scroll', checkScrolledToEnd);
+        }
+      };
+      window.addEventListener('scroll', checkScrolledToEnd, { passive: true });
+      checkScrolledToEnd();
 
-  .wrapper {
-    max-height: 100%;
-    max-width: 1080px;
-    margin: 0 auto;
-    margin-bottom: 128px;
-    display: flex;
-    flex-direction: column;
-    padding: 16px;
-    padding-bottom: 100px;
-  }
+      agreeCheckbox.addEventListener('change', (e) => {
+        submitButton.disabled = !e.target.checked;
+      });
 
-  .privacy-policy-content {
-    background-color: rgba(255, 255, 255, 0.8);
-    border-radius: 8px;
-    padding: 16px 32px;
-    overflow-y: auto;
-    line-height: 1.4;
-  }
-
-  @media screen and (max-width: 600px) {
-
-
-    .privacy-policy-content {
-      /* background-color: rgba(255, 255, 0, 0.8); */
-      padding: 8px 16px;
+      submitButton.addEventListener('click', (e) => {
+        if (!agreeCheckbox.checked) {
+          e.preventDefault();
+          alert('Please agree to the terms');
+        }
+      });
+    } else {
+      consentForm.style.display = 'none';
     }
-
-  }
-
-</style>
-
-<script>
-  const queryString = window.location.search;
-  const queryParams = new URLSearchParams(queryString);
-  const state = queryParams.get('state');
-  const callbackUrl = queryParams.get('callback');
-
-  const consentForm = document.getElementById('consent-form');
-  if (state && callbackUrl) {
-    const submitButton = document.getElementById('submit-button');
-    const agreeCheckbox = document.getElementById('agree');
-    const stateInput = document.getElementById('state-input')
-
-    consentForm.action = decodeURI(callbackUrl);
-    stateInput.value = state;
-
-
-
-    agreeCheckbox.addEventListener('change', (e) => {
-      submitButton.disabled = !e.target.checked;
-    });
-
-
-    submitButton.addEventListener('click', (e) => {
-      if (!agreeCheckbox.checked) {
-        e.preventDefault();
-        alert('Please agree to the terms');
-      }
-
-    });
-
-  } else {
-    consentForm.style.display = 'none';
-  }
-
-</script>
+  </script>
+</body>
 
 </html>

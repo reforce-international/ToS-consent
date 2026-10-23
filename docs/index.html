@@ -7,17 +7,6 @@
     <meta name="description" content="Howwe Terms of Service, Privacy Policy and sub-processors." />
     <title>Welcome to Howwe</title>
     <link rel="icon" href="favicon.ico" />
-    <script>
-      // Frost users keep the page they had before. Runs first, so nothing flashes.
-      (function () {
-        try {
-          var cb = new URLSearchParams(window.location.search).get('callback');
-          if (cb && new URL(cb).hostname === 'engine-login.frost.com') {
-            window.location.replace('frost.html' + window.location.search);
-          }
-        } catch (e) {}
-      })();
-    </script>
     <style>
       @font-face {
         font-family: 'Mulish';

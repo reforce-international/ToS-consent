@@ -21,9 +21,7 @@ The callback is only followed when it is `https://<host>/continue` on one of our
 | File | What it is |
 | --- | --- |
 | `docs/index.html` | The notice for Howwe. Edit it directly. The version shown at the bottom should match the version of the terms on howwe.io/legal |
-| `docs/frost.html` | The previous page with the full privacy policy, still used by the Frost tenant (`engine-login.frost.com`). `index.html` sends Frost users there |
 | `docs/assets/fonts/` | Self-hosted Mulish, so the page makes no requests to Google Fonts |
-| `privacy-policy.md`, `_index.html` | Source of `docs/frost.html`. Regenerate it with `npm run generate` |
 
 ## Local preview
 

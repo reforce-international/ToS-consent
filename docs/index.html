@@ -148,7 +148,10 @@
           form.hidden = false;
           var agree = document.getElementById('agree');
           var button = document.getElementById('continue');
-          agree.addEventListener('change', function () { button.disabled = !agree.checked; });
+          var sync = function () { button.disabled = !agree.checked; };
+          agree.addEventListener('change', sync);
+          // The browser can restore a ticked box on back or reload, so match the button to it.
+          sync();
         }
       })();
     </script>

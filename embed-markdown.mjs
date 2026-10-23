@@ -3,7 +3,7 @@ import { marked } from "marked";
 
 const MD_FILE = "privacy-policy.md";
 const HTML_BASE_FILE = "_index.html";
-const HTML_OUTPUT_FILE = "docs/index.html";
+const HTML_OUTPUT_FILE = "docs/frost.html";
 
 try {
   const pageBase = await readFile(HTML_BASE_FILE, "utf8");

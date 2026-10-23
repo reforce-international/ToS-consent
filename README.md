@@ -1,6 +1,6 @@
 # terms.howwe.io
 
-The page users see the first time they sign in to Howwe. It links to the Terms of Service, Privacy Policy and sub-processors on [howwe.io/legal](https://howwe.io/legal/), and the user continues by clicking Continue.
+The page users see the first time they sign in to Howwe. It links to the Terms of Service, Privacy Policy and sub-processors on [howwe.io/legal](https://howwe.io/legal/). The user ticks "I agree to the Howwe Terms of Service" and clicks Continue.
 
 Hosted on GitHub Pages from `docs/`. Push to `main` to deploy.
 
@@ -12,9 +12,9 @@ The Auth0 post-login Action `ToS-consent` (in the `auth0` repo) sends users who 
 https://terms.howwe.io/?state=<auth0 state>&callback=https://<auth0 host>/continue
 ```
 
-`docs/index.html` shows the notice and a Continue button. Continue sends the user back to the callback with `state` and `agree=true`, and the Action stores the consent on the user.
+`docs/index.html` shows the notice, a checkbox "I agree to the Howwe Terms of Service" and a Continue button that is enabled once the box is ticked. Continue sends the user back to the callback with `state` and `agree=true`, and the Action stores the consent on the user.
 
-The callback is only followed when it is `https://<host>/continue` on one of our own Auth0 hosts (`login.howwe.io`, `login.howwe.dev` or `howwe*.eu.auth0.com`). Opened without `state` and `callback`, the page shows the links and a button to the app.
+The callback is only followed when it is `https://<host>/continue` on one of our own Auth0 hosts (`login.howwe.io`, `login.howwe.dev` or `howwe*.eu.auth0.com`). Opened without `state` and `callback`, the page only shows the links, with no checkbox and no button.
 
 ## Files
 
@@ -29,4 +29,4 @@ The callback is only followed when it is `https://<host>/continue` on one of our
 npx serve docs
 ```
 
-Then open http://localhost:3000/ for the plain page, or add `?state=test&callback=https://login.howwe.io/continue` to see the sign-in version with the Continue button.
+Then open http://localhost:3000/ for the plain page, or add `?state=test&callback=https://login.howwe.io/continue` to see the sign-in version with the checkbox and Continue button.

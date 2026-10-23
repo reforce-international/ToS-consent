@@ -66,7 +66,8 @@
       li { padding: 12px 0; border-bottom: 1px solid var(--line); color: var(--muted); font-size: 0.95rem; }
       li a { color: var(--ink); font-weight: 800; text-decoration: underline; text-decoration-color: var(--orange); text-underline-offset: 3px; }
       li a:hover, li a:focus-visible { color: var(--orange-lt); }
-      .agree { color: var(--ink); font-weight: 700; }
+      .agree { display: flex; align-items: flex-start; gap: 12px; margin: 4px 0 18px; color: var(--ink); font-weight: 700; cursor: pointer; }
+      .agree input { flex-shrink: 0; width: 20px; height: 20px; margin: 2px 0 0; accent-color: var(--orange); cursor: pointer; }
       .button {
         display: block;
         width: 100%;
@@ -83,7 +84,8 @@
         cursor: pointer;
         box-shadow: 0 12px 30px -10px rgba(255, 98, 0, 0.6);
       }
-      .button:hover, .button:focus-visible { background: var(--orange-dark); }
+      .button:not(:disabled):hover, .button:not(:disabled):focus-visible { background: var(--orange-dark); }
+      .button:disabled { background: rgba(238, 243, 246, 0.18); color: rgba(238, 243, 246, 0.6); box-shadow: none; cursor: not-allowed; }
       .button:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
       .meta { margin: 18px 0 0; font-size: 0.82rem; text-align: center; }
       .meta a { color: var(--muted); }
@@ -110,14 +112,13 @@
 
       <!-- Shown only during sign-in, when Auth0 sends state and callback. -->
       <form id="consent-form" method="get" hidden>
-        <p class="agree">By continuing, you agree to the Howwe Terms of Service.</p>
+        <label class="agree" for="agree">
+          <input type="checkbox" id="agree" name="agree" value="true" required />
+          <span>I agree to the Howwe Terms of Service.</span>
+        </label>
         <input type="hidden" name="state" id="state-input" />
-        <input type="hidden" name="agree" value="true" />
-        <button type="submit" class="button">Continue</button>
+        <button type="submit" class="button" id="continue" disabled>Continue</button>
       </form>
-
-      <!-- Shown when the page is opened directly. -->
-      <a class="button" id="open-app" href="https://app.howwe.io/">Go to Howwe</a>
 
       <p class="meta">Version 2026-10-22 · <a href="https://howwe.io/legal/">All legal documents</a> · <a href="mailto:contact@howwe.io">contact@howwe.io</a></p>
     </main>
@@ -145,7 +146,9 @@
           form.action = target;
           document.getElementById('state-input').value = state;
           form.hidden = false;
-          document.getElementById('open-app').hidden = true;
+          var agree = document.getElementById('agree');
+          var button = document.getElementById('continue');
+          agree.addEventListener('change', function () { button.disabled = !agree.checked; });
         }
       })();
     </script>

@@ -99,8 +99,9 @@
         <span class="brand-line">Intelligent Strategy Execution</span>
       </div>
 
-      <h1>Welcome to Howwe</h1>
-      <p>Howwe is provided to you by your organisation under its agreement with Howwe Technologies AB (publ).</p>
+      <!-- The heading and checkbox text below are for new users. When reason=update the script swaps them and adds a paragraph above the intro. -->
+      <h1 id="heading">Welcome to Howwe</h1>
+      <p id="intro">Howwe is provided to you by your organisation under its agreement with Howwe Technologies AB (publ).</p>
 
       <ul>
         <li><a href="https://howwe.io/legal/terms" target="_blank" rel="noopener">Terms of Service</a>: how you may use Howwe, including through AI assistants such as Microsoft Copilot, Claude, ChatGPT and Gemini.</li>
@@ -114,18 +115,28 @@
       <form id="consent-form" method="get" hidden>
         <label class="agree" for="agree">
           <input type="checkbox" id="agree" name="agree" value="true" required />
-          <span>I have read the Terms of Service, the Privacy Policy and the list of sub-processors, and I agree to the Howwe Terms of Service.</span>
+          <span id="agree-text">I have read the Terms of Service, the Privacy Policy and the list of sub-processors, and I agree to the Howwe Terms of Service.</span>
         </label>
         <input type="hidden" name="state" id="state-input" />
         <button type="submit" class="button" id="continue" disabled>Continue</button>
       </form>
 
-      <p class="meta">Version 2026-10-22 · <a href="https://howwe.io/legal/">All legal documents</a> · <a href="mailto:contact@howwe.io">contact@howwe.io</a></p>
+      <p class="meta">Version <span id="version">2026-10-22</span> · <a href="https://howwe.io/legal/">All legal documents</a> · <a href="mailto:contact@howwe.io">contact@howwe.io</a></p>
     </main>
 
     <script>
       (function () {
-        // Auth0 sends the user here with ?state=...&callback=https://<tenant host>/continue.
+        // Text for users who agreed to an earlier version and are asked again (reason=update).
+        // New users get the text already in the markup.
+        var UPDATE_COPY = {
+          title: 'Updated terms for Howwe',
+          heading: 'We have updated our terms',
+          intro: 'We have updated our legal documents since you last agreed to them. Please read them and confirm to continue to Howwe.',
+          agree: 'I have read the current Terms of Service, Privacy Policy and list of sub-processors, and I agree to the Howwe Terms of Service.'
+        };
+
+        // Auth0 sends the user here with ?state=...&callback=https://<tenant host>/continue,
+        // plus reason=new|update and termsVersion=YYYY-MM-DD.
         // Only return to our own Auth0 hosts, never to an address from somewhere else.
         var ALLOWED_HOSTS = ['login.howwe.io', 'login.howwe.dev'];
         var params = new URLSearchParams(window.location.search);
@@ -142,6 +153,21 @@
         } catch (e) {}
 
         if (state && target) {
+          if (params.get('reason') === 'update') {
+            document.title = UPDATE_COPY.title;
+            document.getElementById('heading').textContent = UPDATE_COPY.heading;
+            // Added above the intro, which says who provides Howwe and stays as it is.
+            var updateIntro = document.createElement('p');
+            updateIntro.textContent = UPDATE_COPY.intro;
+            document.getElementById('intro').before(updateIntro);
+            document.getElementById('agree-text').textContent = UPDATE_COPY.agree;
+          }
+          // Show the version the Action sent. Display only: it is not sent back with the form.
+          var termsVersion = params.get('termsVersion');
+          if (/^\d{4}-\d{2}-\d{2}$/.test(termsVersion || '')) {
+            document.getElementById('version').textContent = termsVersion;
+          }
+
           var form = document.getElementById('consent-form');
           form.action = target;
           document.getElementById('state-input').value = state;
